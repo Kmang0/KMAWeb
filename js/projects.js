@@ -208,11 +208,11 @@ Output files generated:
     // ============================================================
     {
         id: 'rsa-encryption-demo',
-        title: 'RSA Key Generation & Message Encryption Demo (Java)',
+        title: 'RSA Key Generation & Message Encryption',
         difficulty: 'Intermediate',
         summary: 'Educational implementation demonstrating RSA public-key cryptography, including key pair generation, message encryption/decryption, and security best practices.',
         description: 'This Java project demonstrates the RSA public-key cryptosystem, a foundational algorithm in modern cybersecurity. The implementation covers key generation, encryption, and decryption workflows while emphasizing educational clarity and security awareness. The project includes explanations of cryptographic concepts, security pitfalls, and ethical considerations.',
-        technologies: ['Java', 'Cryptography', 'Security', 'JCA/JCE'],
+        technologies: ['Java', 'Cryptography', 'Security'],
         categories: ['Java', 'Security/Crypto'],
         features: [
             'Generates 2048-bit RSA key pairs using Java Crypto',
@@ -235,7 +235,7 @@ Output files generated:
         details: {
             algorithmExplanation: `
                 <h4>What is RSA?</h4>
-                <p>RSA IDIOT (Rivest-Shamir-Adleman) is a public-key cryptosystem widely used for secure data transmission. It uses two keys: a <strong>public key</strong> (shared openly) for encryption, and a <strong>private key</strong> (kept secret) for decryption.</p>
+                <p>RSA (Rivest-Shamir-Adleman) is a public-key cryptosystem widely used for secure data transmission. It uses two keys: a <strong>public key</strong> (shared openly) for encryption, and a <strong>private key</strong> (kept secret) for decryption.</p>
                 
                 <h4>How It Works (Simplified)</h4>
                 <ol>
@@ -254,9 +254,6 @@ Output files generated:
                     <li><strong>Small message attacks:</strong> Messages smaller than the modulus can be guessed</li>
                     <li><strong>No integrity checking:</strong> Ciphertext can be modified undetected</li>
                 </ul>
-                
-                <h4>Padding: OAEP</h4>
-                <p>Optimal Asymmetric Encryption Padding (OAEP) adds randomness and structure to messages before encryption, preventing the attacks above. Modern RSA implementations always use OAEP or similar padding schemes.</p>
             `,
             sampleOutput: `=== RSA Encryption Demo ===
 
@@ -300,6 +297,104 @@ Output files generated:
                 'JUnit tests for encryption round-trip',
                 'Security documentation and best practices guide',
                 'Sample key generation and usage examples'
+            ]
+        }
+    },
+    // ============================================================
+    // PROJECT D: Java Blockchain & Cryptocurrency
+    // ============================================================
+    {
+        id: 'catlincoin-blockchain',
+        title: 'KMACoin: Blockchain & Cryptocurrency',
+        difficulty: 'Advanced',
+        summary: 'Educational implementation of a minimal cryptocurrency: blockchain construction, UTXO model, signed transactions, and balance tracking using RSA and SHA-256.',
+        description: 'This Java project implements a simplified cryptocurrency (CatlinCoin) to demonstrate core blockchain and crypto concepts. The implementation covers key generation and addresses (RSA + SHA-256), the UTXO (Unspent Transaction Output) model, building and validating a chain of blocks, and constructing signed transactions that spend UTXOs and pay fees. The code connects to a course network API to download and upload transactions and blocks, emphasizing educational clarity and security practices.',
+        technologies: ['Java', 'Cryptography', 'RSA', 'Data Structures'],
+        categories: ['Java', 'Security/Crypto'],
+        features: [
+            'Generates RSA key pairs and derives addresses (public key hash)',
+            'UTXO pool to track unspent outputs and compute balances',
+            'Builds blockchain from downloaded blocks and transactions',
+            'Signed transactions with inputs (UTXO refs) and outputs (recipient + amount)',
+            'Coinbase transactions and miner rewards',
+            'Transaction fees and minimum-fee enforcement',
+            'Network: download/upload transactions and blocks via API',
+            'Payment helper: select UTXOs, create transaction, upload',
+            'Display utilities: all blocks, all transactions, chain summary, balances'
+        ],
+        learningOutcomes: [
+            'Understanding of blockchain structure (blocks, previous-block hash, transaction list)',
+            'UTXO model vs account-based ledgers',
+            'How signing and address hashes provide authenticity',
+            'Practical experience with Java Cryptography (RSA, SHA-256)',
+            'Balance computation from UTXO set',
+            'Transaction construction and fee handling'
+        ],
+        featured: true,
+        githubUrl: 'https://github.com/Kmang0/KMACoin',
+        demoUrl: null,
+        details: {
+            algorithmExplanation: `
+                    <h4>What is a Blockchain?</h4>
+                    <p>A <strong>blockchain</strong> is a linked list of <strong>blocks</strong>, each containing a set of <strong>transactions</strong>. Each block stores a hash of the previous block, forming a chain. Tampering with an old block would change its hash and break the chain.</p>
+                    
+                    <h4>UTXO Model</h4>
+                    <p>Coins are represented as <strong>Unspent Transaction Outputs (UTXOs)</strong>. Each UTXO has an amount, a destination address, and a reference to the transaction that created it. Spending means consuming one or more UTXOs as <strong>inputs</strong> and creating new UTXOs as <strong>outputs</strong> (payments to recipients and optionally change back to the sender).</p>
+                    
+                    <h4>Transactions</h4>
+                    <p>A <strong>transaction</strong> lists inputs (references to UTXOs being spent) and outputs (recipient address + amount). The sender signs the transaction with their private key; anyone can verify the signature with the sender's public key. The hash of the public key is the sender's <strong>address</strong>.</p>
+                    
+                    <h4>Blocks and Mining</h4>
+                    <p><strong>Blocks</strong> bundle transactions (including a <strong>coinbase</strong> transaction that pays the miner). The block header includes the previous block hash, a hash of the transaction list, and a <strong>nonce</strong>. Mining is finding a nonce so the block hash meets a <strong>difficulty</strong> target (e.g. leading zeros), which secures the chain and controls issuance.</p>
+                    
+                    <h4>Security Notes</h4>
+                    <ul>
+                        <li><strong>Addresses</strong> are derived from public keys (e.g. SHA-256); private keys never leave the owner.</li>
+                        <li><strong>Signatures</strong> prevent forging spends from an address without the private key.</li>
+                        <li><strong>Hashing</strong> (SHA-256) ties blocks and transactions together and detects modification.</li>
+                    </ul>
+                `,
+            sampleOutput: `=== CatlinCoin / Blockchain Demo ===
+    
+    [1] Key pair & address (e.g. KMA):
+        AF2EFB5AF18FF657D37C4494482FC68846755318AE262FE6523AB25E60BF6547 (KMA)
+    
+    [2] All Blocks (pennyBCoin):
+    ============================================================================
+    ================ All Blocks ================================================
+    Block: <hash> height 0 ...
+    Block: <hash> height 1 ...
+    ============================================================================
+    
+    [3] All Transactions:
+    ============================================================================
+    ================ All Transactions ==========================================
+      --- Transaction: <hash> --- ...
+    ============================================================================
+    
+    [4] Block chain summary:
+    = = = = BLOCK CHAIN = = = = = = = = = = = = = = = = = = = = = =
+    -*-*-*-*-*-*-*- BLOCK: <hash> ----- height 0 ------
+      --- Transaction: <hash> --- ...
+    
+    ========== UNCONFIRMED TRANSACTIONS ===========
+    ================================================
+    
+    [5] Balances:
+    Balance for <address> is <amount>
+    ...`,
+            ethicsNotes: [
+                'Educational only; not for real money or production use',
+                'Private keys must stay local and never be committed or transmitted in plaintext',
+                'Use established crypto libraries (e.g. JCA/JCE); do not invent your own algorithms',
+                'Understand regulatory and ethical implications of cryptocurrency and privacy'
+            ],
+            deliverables: [
+                'Java source: Currency, BlockChain, Block, Transaction, UTXO/UTXOPool, CryptoRSA, Network, Utility',
+                'Key generation and address display',
+                'Blockchain build from network data and balance computation',
+                'Transaction creation, signing, and upload (e.g. payment helper)',
+                'Display utilities for blocks, transactions, chain summary, and balances'
             ]
         }
     }
