@@ -464,6 +464,73 @@ a:hover {
 .code-string { color: #98c379; }
 .code-function { color: #61afef; }
 
+/* Roboticist window (hero) */
+.code-window--roboticist .roboticist-content {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.roboticist-image-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 220px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roboticist-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.roboticist-details {
+    width: 100%;
+    text-align: center;
+}
+
+.roboticist-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+}
+
+.roboticist-competencies {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.roboticist-competencies li::before {
+    content: "▹ ";
+    color: var(--color-primary);
+}
+
+.roboticist-passion {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.roboticist-infinity {
+    color: #98c379;
+    font-weight: 600;
+}
+
 /* Featured Projects Preview */
 .featured-section {
     max-width: var(--container-max);
