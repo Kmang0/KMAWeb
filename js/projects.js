@@ -230,7 +230,7 @@ Output files generated:
             'Ethical considerations in security implementations'
         ],
         featured: true,
-        githubUrl: 'https://github.com/yourusername/rsa-encryption-demo',
+        githubUrl: 'https://github.com/Kmang0/RSA',
         demoUrl: null,
         details: {
             algorithmExplanation: `
