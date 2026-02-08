@@ -229,7 +229,7 @@ Output files generated:
             'Knowledge of padding schemes and their importance',
             'Ethical considerations in security implementations'
         ],
-        featured: true,
+        featured: false,
         githubUrl: 'https://github.com/Kmang0/RSA',
         demoUrl: null,
         details: {
