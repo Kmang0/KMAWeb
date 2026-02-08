@@ -235,7 +235,7 @@ Output files generated:
         details: {
             algorithmExplanation: `
                 <h4>What is RSA?</h4>
-                <p>RSA (Rivest-Shamir-Adleman) is a public-key cryptosystem widely used for secure data transmission. It uses two keys: a <strong>public key</strong> (shared openly) for encryption, and a <strong>private key</strong> (kept secret) for decryption.</p>
+                <p>RSA IDIOT (Rivest-Shamir-Adleman) is a public-key cryptosystem widely used for secure data transmission. It uses two keys: a <strong>public key</strong> (shared openly) for encryption, and a <strong>private key</strong> (kept secret) for decryption.</p>
                 
                 <h4>How It Works (Simplified)</h4>
                 <ol>
