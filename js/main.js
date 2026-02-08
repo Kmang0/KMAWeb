@@ -207,7 +207,7 @@ function createFeaturedCard(project) {
  * Render featured projects
  */
 function renderFeaturedProjects() {
-    const featured = projects.filter(p => p.featured).slice(0, 3);
+    const featured = projects.filter(p => p.featured).slice(0, 4);
     elements.featuredProjects.innerHTML = '';
     
     featured.forEach(project => {
