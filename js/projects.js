@@ -31,84 +31,93 @@
 
 const projects = [
     // ============================================================
-    // SEEDED PROJECT A: C++ Route Planner
+    // SEEDED PROJECT A: C++ Puzzle Solving (Search Algorithms)
     // ============================================================
     {
-        id: 'galactic-route-planner',
-        title: 'Galactic Ride-Share Route Planner (C++)',
+        id: 'puzzle-solving-search',
+        title: 'Puzzle Solving with Search Algorithms (C++)',
         difficulty: 'Intermediate',
-        summary: 'A traveling-salesperson-style route solver that optimizes delivery routes across planetary destinations using greedy heuristics and local improvement algorithms.',
-        description: 'This project implements a route optimization system for a fictional galactic ride-share service. Given a set of planets (nodes) with distances between them (edge weights), the program computes efficient delivery routes using two algorithmic approaches: a baseline greedy nearest-neighbor heuristic and a 2-opt local improvement technique. The project demonstrates fundamental concepts in graph algorithms, combinatorial optimization, and computational complexity.',
-        technologies: ['C++', 'STL', 'File I/O', 'Algorithms'],
+        summary: 'A C++ framework that solves puzzles using various search algorithms—uninformed (BFS, DFS, DLS, IDDFS) and informed (A*, IDA*)—applied to the 15-puzzle and extensible to other state-space problems.',
+        description: 'This project implements a general-purpose puzzle-solving system that utilizes various search algorithms to find solutions to combinatorial puzzles. The core idea is to model puzzles as state-space search problems: each configuration is a state, and legal moves are actions that transition between states. The program applies multiple search strategies—breadth-first search (BFS), depth-first search (DFS), depth-limited search (DLS), iterative deepening depth-first search (IDDFS), A* with a heuristic, and iterative deepening A* (IDA*)—to the classic 15-puzzle (sliding tile puzzle), comparing completeness, optimality, and efficiency. The design is modular so new puzzles and search algorithms can be added without changing the solver core, demonstrating fundamental concepts in artificial intelligence, graph search, and algorithm design.',
+        technologies: ['C++', 'STL', 'Algorithms', 'Data Structures'],
         categories: ['C++', 'Algorithms'],
         features: [
-            'Reads planet coordinates from CSV/text files',
-            'Computes Euclidean distances between all planet pairs',
-            'Implements nearest-neighbor greedy heuristic',
-            'Implements 2-opt local improvement algorithm',
-            'Compares solution quality between approaches',
-            'Outputs ordered route and total distance'
+            'Generic State/Action/Search interface for pluggable puzzles',
+            '15-puzzle state representation with goal check and heuristic',
+            'BFS and DFS (queue and stack frontiers)',
+            'Depth-limited search (DLS) with configurable depth',
+            'Iterative deepening depth-first search (IDDFS)',
+            'A* search with Manhattan-distance heuristic',
+            'Iterative deepening A* (IDA*) for memory-efficient optimal search',
+            'Solver abstraction that runs any Search strategy on any State',
+            'Solution output: sequence of actions and optional state path'
         ],
         learningOutcomes: [
-            'Understanding of NP-hard problems and the TSP',
-            'Implementation of greedy algorithms and their limitations',
-            'Local search techniques for optimization',
-            'File parsing and data structures in C++',
-            'Algorithm complexity analysis'
+            'State-space formulation of puzzles and search problems',
+            'Uninformed vs informed search and when to use each',
+            'Trade-offs: completeness, optimality, time and space complexity',
+            'Heuristic design and admissibility for A* and IDA*',
+            'Modular C++ design with inheritance and abstract interfaces'
         ],
         featured: true,
-        githubUrl: 'https://github.com/yourusername/galactic-route-planner',
+        githubUrl: 'https://github.com/Kmang0/PuzzleSolving',
         demoUrl: null,
         details: {
             algorithmExplanation: `
-                <h4>The Traveling Salesperson Problem (TSP)</h4>
-                <p>The TSP asks: "Given a list of cities and distances between them, what is the shortest possible route that visits each city exactly once and returns to the origin?" This problem is NP-hard, meaning no known efficient algorithm solves all cases optimally.</p>
+                <h4>Puzzle Solving as Search</h4>
+                <p>Many puzzles can be modeled as <strong>state-space search</strong>: a <strong>state</strong> is one configuration (e.g. the 4×4 tile layout), <strong>actions</strong> are legal moves (e.g. slide the blank up/down/left/right), and the goal is to reach a target state (e.g. tiles in order). Different search algorithms explore this space in different ways—some guarantee finding a solution or an optimal one; others trade completeness for speed or memory.</p>
                 
-                <h4>Nearest-Neighbor Heuristic (Greedy)</h4>
-                <p>The greedy approach starts at a random planet and repeatedly visits the nearest unvisited planet until all are visited, then returns to the start. While fast (O(n²)), it can produce suboptimal routes due to its myopic decision-making—early choices may force long jumps later.</p>
+                <h4>Uninformed Search (No Heuristic)</h4>
+                <p><strong>BFS</strong> expands the shallowest node first (queue). It is complete and optimal for unit step costs. <strong>DFS</strong> goes deep first (stack); it can be incomplete and non-optimal but uses less memory. <strong>DLS</strong> is DFS with a depth limit to avoid infinite branches. <strong>IDDFS</strong> runs DLS with increasing depth limits, combining DFS memory use with BFS-like completeness and optimality for unit costs.</p>
                 
-                <h4>2-Opt Local Improvement</h4>
-                <p>The 2-opt algorithm improves an existing route by repeatedly selecting two edges and reversing the path between them if it reduces total distance. This local search escapes some greedy pitfalls but may get stuck in local optima.</p>
+                <h4>Informed Search (With Heuristic)</h4>
+                <p><strong>A*</strong> expands nodes by f(n) = g(n) + h(n) (cost so far + heuristic estimate). With an <strong>admissible</strong> heuristic (never overestimates), A* is complete and optimal. For the 15-puzzle, the Manhattan distance of each tile to its goal position is a common admissible heuristic. <strong>IDA*</strong> uses iterative deepening on the f-cost threshold, giving optimal solutions with much lower memory than A*.</p>
                 
-                <h4>Complexity Analysis</h4>
+                <h4>Complexity Notes</h4>
                 <ul>
-                    <li><strong>Nearest-Neighbor:</strong> O(n²) time, O(n) space</li>
-                    <li><strong>2-Opt:</strong> O(k·n²) where k is iterations until convergence</li>
+                    <li><strong>BFS/DFS:</strong> Time and space depend on branching factor and solution depth</li>
+                    <li><strong>IDDFS:</strong> Time similar to BFS in the worst case; space O(b·d) for depth d</li>
+                    <li><strong>A*:</strong> Optimal with admissible heuristic; space can be large (open/closed sets)</li>
+                    <li><strong>IDA*:</strong> Optimal with admissible heuristic; space O(b·d), no closed set</li>
                 </ul>
             `,
-            sampleOutput: `=== Galactic Route Planner ===
-Loading planets from: planets.csv
-Loaded 5 planets:
-  0: Terra (0, 0)
-  1: Mars (4, 0)
-  2: Europa (7, 3)
-  3: Titan (3, 6)
-  4: Kepler (0, 5)
+            sampleOutput: `=== Puzzle Solving - Search Algorithms ===
 
---- Nearest-Neighbor Route ---
-Route: Terra → Mars → Europa → Titan → Kepler → Terra
-Total Distance: 20.43 light-years
+Initial Puzzle State:
+ 1  2  3  4
+ 5  6  7  8
+ 9 10 11 12
+13 14  0 15
 
---- 2-Opt Improved Route ---
-Route: Terra → Mars → Europa → Titan → Kepler → Terra
-Total Distance: 18.76 light-years
+Is this the goal state? false
+
+Possible moves: [Slide Blank Up] [Slide Blank Left]
+
+--- Solving with BFS ---
+Strategy: BFS
+Solution found. Actions: 2
+(Sequence of slide actions to reach goal)
+
+--- Solving with A* ---
+Strategy: A*
+Solution found. Actions: 2
+(Optimal sequence using heuristic)
 
 --- Comparison ---
-Improvement: 1.67 light-years (8.2% reduction)
-2-Opt found a better route by reordering visits!`,
-            sampleData: `# planets.csv - Planet coordinates (x, y in light-years)
-# name, x, y
-Terra, 0, 0
-Mars, 4, 0
-Europa, 7, 3
-Titan, 3, 6
-Kepler, 0, 5`,
+BFS: complete, optimal for unit cost; may expand many nodes
+A*:  complete, optimal with admissible heuristic; fewer expansions with good h(n)`,
+            sampleData: `# Initial state array (4×4 row-major; 0 = blank)
+# Goal: 1,2,...,15,0
+1, 2, 3, 4
+5, 6, 7, 8
+9, 10, 11, 12
+13, 14, 0, 15`,
             deliverables: [
-                'Complete C++ source code with modular design',
-                'Sample input data files (CSV format)',
-                'Makefile for easy compilation',
-                'README with usage instructions',
-                'Test cases with expected outputs'
+                'Complete C++ source with State, Action, Search, Solver, and Frontier abstractions',
+                '15-puzzle state and actions plus heuristic',
+                'Implementations: BFS, DFS, DLS, IDDFS, A*, IDA*',
+                'CMakeLists.txt (or Makefile) for compilation',
+                'README with build/run instructions and algorithm overview'
             ]
         }
     },
