@@ -123,91 +123,79 @@ A*:  complete, optimal with admissible heuristic; fewer expansions with good h(n
     },
 
     // ============================================================
-    // SEEDED PROJECT B: MATLAB Wind Farm Analysis
+    // SEEDED PROJECT B: MATLAB Blackjack Card Counting Simulation
     // ============================================================
     {
-        id: 'wind-farm-analysis',
-        title: 'Offshore Wind Farm Site Analysis (MATLAB)',
+        id: 'bjsim-card-counting',
+        title: 'Blackjack Card Counting Monte Carlo (MATLAB)',
         difficulty: 'Intermediate',
-        summary: 'Data analysis and visualization project that evaluates candidate offshore wind farm sites using multi-criteria decision analysis and produces publication-quality plots.',
-        description: 'This MATLAB project analyzes a dataset of candidate offshore wind farm locations to identify the most promising site for development. The analysis includes data cleaning, derived metric computation using weighted scoring, and comprehensive visualization. The project demonstrates skills in data processing, statistical analysis, and technical communication through visualizations.',
-        technologies: ['MATLAB', 'Data Analysis', 'Visualization', 'Statistics'],
+        summary: 'Monte Carlo simulation that evaluates expected value (EV) of blackjack across true count and shoe penetration, using Hi-Lo counting and basic strategy, with publication-quality visualizations.',
+        description: 'This MATLAB project simulates thousands of blackjack hands across multiple shoes to analyze how expected value varies with the Hi-Lo true count and deck penetration. The pipeline runs a configurable grid of conditions (number of decks, hands per shoe, rules), bins results by true count and penetration, and produces EV vs true count (with error bars), an EV heatmap, and 3D surface plots. It demonstrates simulation design, statistical aggregation, and technical visualization in MATLAB.',
+        technologies: ['MATLAB', 'Simulation', 'Visualization', 'Statistics'],
         categories: ['MATLAB', 'Data Analysis'],
         features: [
-            'Loads and validates site data from CSV files',
-            'Handles missing values with interpolation',
-            'Computes weighted site suitability scores',
-            'Generates histogram of wind speed distribution',
-            'Creates scatter plot with multi-dimensional encoding',
-            'Produces ranked bar chart of top candidates',
-            'Outputs formatted recommendation report'
+            'Multi-shoe Monte Carlo simulation with configurable rules (S17, 3:2, double down)',
+            'Hi-Lo card counting and true count computation',
+            'Basic strategy player and dealer logic (hand value, soft 17, double down)',
+            'Bins results by true count and penetration; computes EV, win rate, standard error',
+            'EV vs True Count plot with 95% confidence bands',
+            'EV heatmap (True Count × penetration)',
+            '3D surf and mesh plots of EV surface',
+            'Exports results to CSV and MAT; saves all figures as PNG'
         ],
         learningOutcomes: [
-            'Data cleaning and preprocessing techniques',
-            'Multi-criteria decision analysis (MCDA)',
-            'Advanced MATLAB plotting and visualization',
-            'Statistical analysis of environmental data',
-            'Technical reporting and data communication'
+            'Monte Carlo simulation design and run-time vs sample size trade-offs',
+            'Card counting (Hi-Lo) and true count conversion',
+            'Binning and aggregation of simulation output',
+            'Advanced MATLAB plotting (errorbar, imagesc, surf, mesh)',
+            'Structured data (tables) and file I/O (writetable, save)'
         ],
         featured: true,
-        githubUrl: 'https://github.com/yourusername/wind-farm-analysis',
+        githubUrl: 'https://github.com/Kmang0/BJCC-SIM',
         demoUrl: null,
         details: {
-            sampleData: `site_id,latitude,longitude,avg_wind_speed,depth_m,distance_to_shore_km,protected_area
-SITE_001,56.2,3.4,8.5,45,12,0
-SITE_002,57.1,2.8,9.2,62,18,0
-SITE_003,55.8,4.1,7.8,38,8,1
-SITE_004,56.5,3.0,8.9,55,15,0
-SITE_005,57.3,2.5,9.5,78,25,0`,
+            sampleData: `TCbin,penBin,EV,winRate,stdErr,numHands
+-4,0.25,-0.017,0.475,0.129,59
+-3,0.25,-0.069,0.413,0.077,160
+0,0.25,0.025,0.460,0.026,1510
+2,0.5,0.012,0.488,0.058,312
+4,0.75,0.42,0.52,0.31,48`,
             sampleOutput: `============================================================
-       OFFSHORE WIND FARM SITE ANALYSIS REPORT
+   BLACKJACK CARD COUNTING MONTE CARLO - REPORT
 ============================================================
 
-Dataset Summary:
-  Total sites analyzed: 24
-  Valid sites (after cleaning): 22
-  Average wind speed: 8.4 m/s
-  Depth range: 25-95 meters
+Simulation Summary:
+  Decks: 6  |  Shoes: 200  |  Hands per shoe: 200
+  Total hands simulated: 11,111
+  Valid (TC, penetration) bins: 48
 
-Scoring Methodology:
-  Site Score = 0.40 × Wind_Speed_Norm 
-             + 0.25 × (1 - Depth_Norm)
-             + 0.25 × (1 - Distance_Norm)
-             + 0.10 × (1 - Protected)
+Methodology:
+  - Hi-Lo count; true count = running count / decks remaining
+  - Bet sizing: 1 unit (TC < 2), 2 units (2 <= TC < 4), 4 units (TC >= 4)
+  - Basic strategy (simplified: no splits); dealer S17, 3:2 blackjack
 
-Top 3 Recommended Sites:
-  1. SITE_015 - Score: 0.87
-     Location: 57.1°N, 2.9°E
-     Wind Speed: 9.8 m/s | Depth: 52m | Distance: 16km
-  
-  2. SITE_022 - Score: 0.84
-     Location: 56.8°N, 3.2°E
-     Wind Speed: 9.4 m/s | Depth: 48m | Distance: 14km
-  
-  3. SITE_008 - Score: 0.81
-     Location: 57.0°N, 2.7°E
-     Wind Speed: 9.1 m/s | Depth: 58m | Distance: 19km
+Outputs:
+  - bj_counting_results.csv  (TCbin, penBin, EV, winRate, stdErr, numHands)
+  - bj_results.mat           (results, TCbins, penBins, params)
+  - EV_vs_TC.png             (EV vs True Count with 95% CI)
+  - EV_Heatmap.png           (EV vs TC and penetration)
+  - EV_Surface_surf.png      (3D surf)
+  - EV_Surface_mesh.png      (3D mesh)
 
-RECOMMENDATION: SITE_015 offers the best balance of high wind
-speeds, manageable depth, reasonable shore distance, and no
-environmental protection restrictions.
-
-Output files generated:
-  - wind_distribution.png
-  - site_scatter_plot.png
-  - top_sites_ranking.png
-  - full_report.txt`,
+RECOMMENDATION: Use EV vs true count and heatmaps to identify
+conditions where the game is favorable; higher positive true
+counts and deeper penetration correlate with positive EV.`,
             screenshots: [
-                'Figure 1: Wind Speed Distribution Histogram',
-                'Figure 2: Site Scatter Plot (Wind Speed vs Depth)',
-                'Figure 3: Top 10 Sites Ranked by Score'
+                'Figure 1: EV vs True Count (with 95% confidence bands)',
+                'Figure 2: EV Heatmap (True Count vs penetration)',
+                'Figure 3: EV Surface (surf and mesh)'
             ],
             deliverables: [
-                'MATLAB script (.m file) with full analysis pipeline',
-                'Sample dataset (CSV format)',
-                'Generated plots (PNG format)',
-                'Summary report (text file)',
-                'Documentation with methodology explanation'
+                'MATLAB scripts: main_blackjack_counting.m, runExperimentGrid.m, simulateHand.m, plotEVvsTC.m, plotEVHeatmap.m, plotEVSurface.m',
+                'Core game logic: drawCard.m, handValue.m, hiLoValue.m, initShoe.m, shuffleShoe.m, playPlayer.m, playDealer.m, scoreHand.m',
+                'Output: bj_counting_results.csv, bj_results.mat',
+                'Generated plots: EV_vs_TC.png, EV_Heatmap.png, EV_Surface_surf.png, EV_Surface_mesh.png',
+                'README with parameters and run instructions'
             ]
         }
     },
