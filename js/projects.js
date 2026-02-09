@@ -185,11 +185,6 @@ Outputs:
 RECOMMENDATION: Use EV vs true count and heatmaps to identify
 conditions where the game is favorable; higher positive true
 counts and deeper penetration correlate with positive EV.`,
-            screenshots: [
-                'Figure 1: EV vs True Count (with 95% confidence bands)',
-                'Figure 2: EV Heatmap (True Count vs penetration)',
-                'Figure 3: EV Surface (surf and mesh)'
-            ],
             deliverables: [
                 'MATLAB scripts: main_blackjack_counting.m, runExperimentGrid.m, simulateHand.m, plotEVvsTC.m, plotEVHeatmap.m, plotEVSurface.m',
                 'Core game logic: drawCard.m, handValue.m, hiLoValue.m, initShoe.m, shuffleShoe.m, playPlayer.m, playDealer.m, scoreHand.m',
