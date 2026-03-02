@@ -8,7 +8,6 @@
  * {
  *   id: string (unique identifier),
  *   title: string (project name),
- *   difficulty: 'Beginner' | 'Intermediate' | 'Advanced',
  *   summary: string (short description for card),
  *   description: string (longer description for modal),
  *   technologies: string[] (tech badges),
@@ -16,6 +15,7 @@
  *   features: string[] (key features list),
  *   learningOutcomes: string[] (what you learned),
  *   featured: boolean (show on homepage),
+ *   inProgress: boolean (optional – show "In progress" tag; for current work),
  *   githubUrl: string (GitHub repo link),
  *   demoUrl: string (live demo link),
  *   details: {
@@ -36,7 +36,6 @@ const projects = [
     {
         id: 'puzzle-solving-search',
         title: 'Puzzle Solving with Search Algorithms (C++)',
-        difficulty: 'Intermediate',
         summary: 'A C++ framework that solves puzzles using various search algorithms—uninformed (BFS, DFS, DLS, IDDFS) and informed (A*, IDA*)—applied to the 15-puzzle and extensible to other state-space problems.',
         description: 'This project implements a general-purpose puzzle-solving system that utilizes various search algorithms to find solutions to combinatorial puzzles. The core idea is to model puzzles as state-space search problems: each configuration is a state, and legal moves are actions that transition between states. The program applies multiple search strategies—breadth-first search (BFS), depth-first search (DFS), depth-limited search (DLS), iterative deepening depth-first search (IDDFS), A* with a heuristic, and iterative deepening A* (IDA*)—to the classic 15-puzzle (sliding tile puzzle), comparing completeness, optimality, and efficiency. The design is modular so new puzzles and search algorithms can be added without changing the solver core, demonstrating fundamental concepts in artificial intelligence, graph search, and algorithm design.',
         technologies: ['C++', 'STL', 'Algorithms', 'Data Structures'],
@@ -128,7 +127,6 @@ A*:  complete, optimal with admissible heuristic; fewer expansions with good h(n
     {
         id: 'bjsim-card-counting',
         title: 'Blackjack Card Counting Monte Carlo (MATLAB)',
-        difficulty: 'Intermediate',
         summary: 'Monte Carlo simulation that evaluates expected value (EV) of blackjack across true count and shoe penetration, using Hi-Lo counting and basic strategy, with publication-quality visualizations.',
         description: 'This MATLAB project simulates thousands of blackjack hands across multiple shoes to analyze how expected value varies with the Hi-Lo true count and deck penetration. The pipeline runs a configurable grid of conditions (number of decks, hands per shoe, rules), bins results by true count and penetration, and produces EV vs true count (with error bars), an EV heatmap, and 3D surface plots. It demonstrates simulation design, statistical aggregation, and technical visualization in MATLAB.',
         technologies: ['MATLAB', 'Simulation', 'Visualization', 'Statistics'],
@@ -201,7 +199,6 @@ counts and deeper penetration correlate with positive EV.`,
     {
         id: 'rsa-encryption-demo',
         title: 'RSA Key Generation & Message Encryption',
-        difficulty: 'Intermediate',
         summary: 'Educational implementation demonstrating RSA public-key cryptography, including key pair generation, message encryption/decryption, and security best practices.',
         description: 'This Java project demonstrates the RSA public-key cryptosystem, a foundational algorithm in modern cybersecurity. The implementation covers key generation, encryption, and decryption workflows while emphasizing educational clarity and security awareness. The project includes explanations of cryptographic concepts, security pitfalls, and ethical considerations.',
         technologies: ['Java', 'Cryptography', 'Security'],
@@ -298,7 +295,6 @@ counts and deeper penetration correlate with positive EV.`,
     {
         id: 'catlincoin-blockchain',
         title: 'KMACoin: Blockchain & Cryptocurrency',
-        difficulty: 'Advanced',
         summary: 'Educational implementation of a minimal cryptocurrency: blockchain construction, UTXO model, signed transactions, and balance tracking using RSA and SHA-256.',
         description: 'This Java project implements a simplified cryptocurrency (CatlinCoin) to demonstrate core blockchain and crypto concepts. The implementation covers key generation and addresses (RSA + SHA-256), the UTXO (Unspent Transaction Output) model, building and validating a chain of blocks, and constructing signed transactions that spend UTXOs and pay fees. The code connects to a course network API to download and upload transactions and blocks, emphasizing educational clarity and security practices.',
         technologies: ['Java', 'Cryptography', 'RSA', 'Data Structures'],
@@ -387,6 +383,50 @@ counts and deeper penetration correlate with positive EV.`,
                 'Blockchain build from network data and balance computation',
                 'Transaction creation, signing, and upload (e.g. payment helper)',
                 'Display utilities for blocks, transactions, chain summary, and balances'
+            ]
+        }
+    },
+    // ============================================================
+    // PROJECT E: SPARK Robot Dog (Social Perception & RL)
+    // ============================================================
+    {
+        id: 'spark-robot-dog',
+        title: 'SPARK: Social Perception and Autonomous Responsive K9',
+        summary: 'The goal is to create a Unitree A1 robot dog that uses PyTorch-based emotion recognition and MuJoCo-trained locomotion policies to adapt play behavior and support stress-reduction interactions.',
+        description: 'The goal for this project is to create SPARK (Social Perception and Autonomous Responsive K9), which is a robot dog platform built on the Unitree A1 that combines vision-based emotion classification with reinforcement-learning locomotion policies to create adaptive, emotionally aware play behavior. The system recognizes human affect from facial expressions and body posture, then selects and executes canine-inspired play strategies designed to uplift mood and support stress reduction. Policies are first trained and evaluated in MuJoCo simulation before being transferred to the real robot with sim-to-real adaptation.',
+        technologies: ['Python', 'PyTorch', 'MuJoCo', 'Reinforcement Learning', 'Computer Vision', 'Robotics'],
+        categories: ['Robotics', 'Machine Learning'],
+        features: [
+            'Vision-based emotion classification from facial expressions and body pose',
+            'RL-driven locomotion and behavior policies for the Unitree A1',
+            'MuJoCo-based training and evaluation pipeline for sim-to-real transfer',
+            'Behavior selector that maps inferred emotional state to play strategies',
+            'Naturalistic canine-inspired behaviors for stress-reduction interaction scenarios',
+            'Modular perception–policy–control architecture for adding new behaviors'
+        ],
+        learningOutcomes: [
+            'Integrating deep visual perception with robot control and reinforcement learning',
+            'Designing sim-to-real pipelines using MuJoCo for policy training and validation',
+            'Mapping human affective state to safe, engaging robot behaviors',
+            'Engineering naturalistic, legged-robot motions inspired by animal behavior',
+            'Building modular robotics software architectures in Python'
+        ],
+        featured: true,
+        inProgress: true,
+        githubUrl: 'https://github.com/yourusername/SPARK',
+        demoUrl: null,
+        details: {
+            screenshots: [
+                'SPARK detecting facial expressions and body pose in the camera view',
+                'MuJoCo simulation of Unitree A1 practicing approach and play behaviors',
+                'On-robot interaction session with user during a stress-reduction scenario'
+            ],
+            deliverables: [
+                'Perception pipeline: emotion and pose classifier built with PyTorch',
+                'RL training scripts and MuJoCo environment configuration for Unitree A1',
+                'On-robot control stack integrating policies, safety checks, and behavior selection',
+                'Experiment scripts for sim-to-real evaluation and interaction studies',
+                'Documentation describing architecture, training procedure, and interaction design'
             ]
         }
     }

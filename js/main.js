@@ -105,7 +105,9 @@ function createProjectCard(project, options = {}) {
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `View details for ${project.title}`);
     
-    const difficultyClass = `difficulty-${project.difficulty.toLowerCase()}`;
+    const inProgressTag = project.inProgress
+        ? '<span class="project-tag project-tag-in-progress">In progress</span>'
+        : '';
     
     const badgesHtml = project.technologies.slice(0, isCompact ? 3 : project.technologies.length).map(tech => 
         `<span class="project-badge">${escapeHtml(tech)}</span>`
@@ -138,7 +140,7 @@ function createProjectCard(project, options = {}) {
         <div class="project-header">
             <div>
                 <h3 class="project-title">${escapeHtml(project.title)}</h3>
-                <span class="project-difficulty ${difficultyClass}">${escapeHtml(project.difficulty)}</span>
+                ${inProgressTag}
             </div>
         </div>
         <div class="project-badges">${badgesHtml}</div>
@@ -249,7 +251,9 @@ function renderProjects() {
  * Open project details modal
  */
 function openModal(project) {
-    const difficultyClass = `difficulty-${project.difficulty.toLowerCase()}`;
+    const inProgressTag = project.inProgress
+        ? '<span class="project-tag project-tag-in-progress">In progress</span>'
+        : '';
     
     const badgesHtml = project.technologies.map(tech => 
         `<span class="project-badge">${escapeHtml(tech)}</span>`
@@ -367,7 +371,7 @@ function openModal(project) {
         <div class="modal-header">
             <h3 id="modal-title" class="modal-title">${escapeHtml(project.title)}</h3>
             <div class="modal-badges">
-                <span class="project-difficulty ${difficultyClass}">${escapeHtml(project.difficulty)}</span>
+                ${inProgressTag}
                 ${badgesHtml}
             </div>
         </div>
