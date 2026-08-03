@@ -1,0 +1,48 @@
+{
+  "name": "portfolio-next-redesign",
+  "version": "1.0.0",
+  "description": "Kenny Ma's robotics engineering portfolio.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:github": "cross-env DEPLOY_TARGET=github-pages next build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "check:links": "linkinator out --recurse --check-fragments --check-css --require-https error --skip \"^mailto:\" --status-code \"403:warn\"",
+    "check:links:github": "node scripts/check-pages-links.mjs",
+    "check": "npm run lint && npm run test && npm run test:e2e && npm run build && npm run check:links && npm run build:github && npm run check:links:github"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "axe-core": "^4.12.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.10",
+    "jsdom": "^29.1.1",
+    "linkinator": "^7.6.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  }
+}

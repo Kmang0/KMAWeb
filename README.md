@@ -1,39 +1,35 @@
-# Personal Portfolio Website
+# KMAWeb
 
-A clean, modern, responsive portfolio website for showcasing CS and engineering programming projects. Built with plain HTML, CSS, and JavaScript—no frameworks required.
+Kenny Ma's single-page robotics engineering portfolio. Built with Next.js,
+TypeScript, and a static-first project catalogue.
 
----
+## Local development
 
-## Features
+Requires Node.js 24 or newer.
 
-- **Single-page design** with smooth scrolling navigation
-- **Data-driven projects** stored in a simple JavaScript array
-- **Search and filter** functionality for projects
-- **Project detail modals** with comprehensive information
-- **Responsive design** that works on mobile, tablet, and desktop
-- **Accessibility features** including keyboard navigation and screen reader support
-- **Dark theme** with professional color palette
+```powershell
+npm install
+npx playwright install chromium
+npm run dev
+```
 
----
+Open `http://localhost:3000`.
 
-## Accessibility Features
+## Verification
 
-- Semantic HTML5 elements
-- ARIA labels and roles
-- Keyboard navigation support
-- Focus management in modals
-- Skip-to-content link
-- Reduced motion support
-- High contrast mode support
+```powershell
+npm run lint
+npm test
+npm run test:e2e
+npm run build
+npm run build:github
+```
 
----
+## Deployment
 
-## Credits
+- Vercel uses the Next.js preset and serves the site from `/`.
+- GitHub Actions builds a static export with the `/KMAWeb` base path and
+  publishes it to GitHub Pages.
 
-- Fonts: [Inter](https://fonts.google.com/specimen/Inter) by Google Fonts
-- Icons: Custom SVG icons (no external libraries needed)
-- Design: Modern dark theme inspired by developer portfolios
-
----
-
-Happy coding! 🚀
+The GitHub Pages URL remains
+`https://kmang0.github.io/KMAWeb/` for compatibility with existing links.
